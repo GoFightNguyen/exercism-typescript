@@ -3,7 +3,9 @@
 {
   "name": "Node.js & TypeScript",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
 
   // Features to add to the dev container. More info: https://containers.dev/features.
   // "features": {},
@@ -18,7 +20,11 @@
   "customizations": {
     "vscode": {
       // Add the IDs of extensions you want installed when the container is created.
-      "extensions": ["esbenp.prettier-vscode", "orta.vscode-jest"]
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "orta.vscode-jest",
+        "exercism.exercism-cli"
+      ]
     }
   }
 
