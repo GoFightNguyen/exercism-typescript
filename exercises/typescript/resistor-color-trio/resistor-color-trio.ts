@@ -20,12 +20,9 @@ export function decodedResistorValue([
 ]: Color[]): string {
   const totalOhms = calculateTotalResistanceValue(color1, color2, color3);
 
-  if (totalOhms > 1000) {
-    const shortened = totalOhms / 1000;
-    return shortened + ' kiloohms';
-  }
-
-  return totalOhms + ' ohms';
+  return totalOhms > 1000
+    ? totalOhms / 1000 + ' kiloohms'
+    : totalOhms + ' ohms';
 }
 
 function calculateTotalResistanceValue(
