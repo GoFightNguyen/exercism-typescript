@@ -18,14 +18,14 @@ export function decodedResistorValue([
   color2,
   color3,
 ]: Color[]): string {
-  const totalOhms = calculateTotalResistanceValue(color1, color2, color3);
+  const totalOhms = calculateTotalResistance(color1, color2, color3);
 
   return totalOhms > 1000
     ? totalOhms / 1000 + ' kiloohms'
     : totalOhms + ' ohms';
 }
 
-function calculateTotalResistanceValue(
+function calculateTotalResistance(
   color1: Color,
   color2: Color,
   color3: Color
