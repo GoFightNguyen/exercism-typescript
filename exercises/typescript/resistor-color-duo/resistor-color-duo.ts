@@ -13,5 +13,5 @@ export function decodedValue([color1, color2]: string[]): number {
   };
   const resistance1 = resistorBandEncodings[color1];
   const resistance2 = resistorBandEncodings[color2];
-  return Number.parseInt(resistance1 + resistance2);
+  return parseInt(resistance1 + resistance2);
 }
