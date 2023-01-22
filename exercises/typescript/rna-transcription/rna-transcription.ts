@@ -1,12 +1,13 @@
-export function toRna(dna: string): string {
-  let rnaComplement = '';
-  for (const dnaNucleotide of dna) {
-    rnaComplement += dnaNucleotideToRnaNucleotide(dnaNucleotide);
+export function toRna(dnaStrand: string): string {
+  let rnaStrand = '';
+  for (const dnaNucleotide of dnaStrand) {
+    rnaStrand += toRnaNucleotide(dnaNucleotide);
   }
-  return rnaComplement;
+  return rnaStrand;
 }
-function dnaNucleotideToRnaNucleotide(dna: string): string {
-  switch (dna) {
+
+function toRnaNucleotide(dnaNucleotide: string): string {
+  switch (dnaNucleotide) {
     case 'C':
       return 'G';
     case 'G':
