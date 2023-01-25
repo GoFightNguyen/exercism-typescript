@@ -5,23 +5,14 @@ function rollDice(): number {
 }
 
 export class DnDCharacter {
-  public constitution: number;
-  public hitpoints: number;
-  public strength: number;
-  public dexterity: number;
-  public intelligence: number;
-  public wisdom: number;
-  public charisma: number;
-
-  constructor() {
-    this.constitution = DnDCharacter.generateAbilityScore();
-    this.hitpoints = 10 + DnDCharacter.getModifierFor(this.constitution);
-    this.strength = DnDCharacter.generateAbilityScore();
-    this.dexterity = DnDCharacter.generateAbilityScore();
-    this.intelligence = DnDCharacter.generateAbilityScore();
-    this.wisdom = DnDCharacter.generateAbilityScore();
-    this.charisma = DnDCharacter.generateAbilityScore();
-  }
+  public readonly constitution = DnDCharacter.generateAbilityScore();
+  public readonly hitpoints =
+    10 + DnDCharacter.getModifierFor(this.constitution);
+  public readonly strength = DnDCharacter.generateAbilityScore();
+  public readonly dexterity = DnDCharacter.generateAbilityScore();
+  public readonly intelligence = DnDCharacter.generateAbilityScore();
+  public readonly wisdom = DnDCharacter.generateAbilityScore();
+  public readonly charisma = DnDCharacter.generateAbilityScore();
 
   public static generateAbilityScore(): number {
     const dieValues = [rollDice(), rollDice(), rollDice(), rollDice()]
