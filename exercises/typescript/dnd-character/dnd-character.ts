@@ -1,3 +1,9 @@
+const roundDownToNearestInt = (value: number): number => Math.floor(value);
+
+function rollDice(): number {
+  return roundDownToNearestInt(Math.random() * 7);
+}
+
 export class DnDCharacter {
   public readonly constitution = 3;
 
@@ -29,9 +35,3 @@ export class DnDCharacter {
     return roundDownToNearestInt((abilityValue - 10) / 2);
   }
 }
-
-function rollDice(): number {
-  return roundDownToNearestInt(Math.random() * 7);
-}
-
-const roundDownToNearestInt = (value: number) => Math.floor(value);
