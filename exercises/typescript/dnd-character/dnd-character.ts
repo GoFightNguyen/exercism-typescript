@@ -5,8 +5,7 @@ function rollDice(): number {
 }
 
 export class DnDCharacter {
-  public readonly constitution = 3;
-
+  public constitution: number;
   public hitpoints: number;
   public strength: number;
   public dexterity: number;
@@ -15,6 +14,7 @@ export class DnDCharacter {
   public charisma: number;
 
   constructor() {
+    this.constitution = DnDCharacter.generateAbilityScore();
     this.hitpoints = 10 + DnDCharacter.getModifierFor(this.constitution);
     this.strength = DnDCharacter.generateAbilityScore();
     this.dexterity = DnDCharacter.generateAbilityScore();
