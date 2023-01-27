@@ -29,8 +29,5 @@ const alphabet = [
 
 export function isPangram(sentence: string): boolean {
   const lowered = sentence.toLocaleLowerCase();
-  for (const letter of alphabet) {
-    if (!lowered.includes(letter)) return false;
-  }
-  return true;
+  return alphabet.every((a) => lowered.includes(a));
 }
