@@ -1,33 +1,4 @@
-const alphabet = [
-  'a',
-  'b',
-  'c',
-  'd',
-  'e',
-  'f',
-  'g',
-  'h',
-  'i',
-  'j',
-  'k',
-  'l',
-  'm',
-  'n',
-  'o',
-  'p',
-  'q',
-  'r',
-  's',
-  't',
-  'u',
-  'v',
-  'w',
-  'x',
-  'y',
-  'z',
-];
-
 export function isPangram(sentence: string): boolean {
-  const lowered = sentence.toLocaleLowerCase();
-  return alphabet.every((a) => lowered.includes(a));
+  const uniqueLettersUsed = new Set(sentence.toLocaleLowerCase().match(/[a-z]/g));
+  return uniqueLettersUsed.size === 26;
 }
