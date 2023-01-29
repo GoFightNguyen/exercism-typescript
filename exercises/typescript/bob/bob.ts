@@ -1,7 +1,7 @@
 const isShouting = (message: string): boolean => {
   const hasLetters = /[a-z]/i;
-  const hasAnyLowercaseLetters = /[a-z]/;
-  return hasLetters.test(message) && !hasAnyLowercaseLetters.test(message);
+  const hasLowercaseLetters = /[a-z]/;
+  return hasLetters.test(message) && !hasLowercaseLetters.test(message);
 };
 
 const isQuestion = (message: string): boolean => message.endsWith('?');
