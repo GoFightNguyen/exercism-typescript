@@ -4,7 +4,7 @@ const isShouting = (message: string): boolean => {
   return hasLetters.test(message) && !hasAnyLowercaseLetters.test(message);
 };
 
-const isQuestion = (message: string): boolean => Boolean(message.match(/\?$/));
+const isQuestion = (message: string): boolean => /\?$/.test(message);
 const isSilent = (message: string): boolean => !message;
 
 export function hey(message: string): string {
