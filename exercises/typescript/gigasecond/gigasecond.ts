@@ -1,9 +1,10 @@
 export class Gigasecond {
-  private static readonly milliseconds = 1_000 * 1_000_000_000;
+  private static readonly SECONDS = 1e9;
+  private static readonly MILLISECONDS = 1_000 * Gigasecond.SECONDS;
 
   constructor(private readonly moment: Date) {}
 
   public date(): Date {
-    return new Date(this.moment.getTime() + Gigasecond.milliseconds);
+    return new Date(this.moment.getTime() + Gigasecond.MILLISECONDS);
   }
 }
