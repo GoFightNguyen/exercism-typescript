@@ -1,20 +1,14 @@
 export class Squares {
-  private readonly naturalNumbers: number[];
-  constructor(count: number) {
-    this.naturalNumbers = Array(count)
-      .fill(0)
-      .map((_, i) => i + 1);
-  }
+  constructor(private readonly count: number) {}
 
   get sumOfSquares(): number {
-    let sum = 0;
-    this.naturalNumbers.forEach((n) => (sum += Math.pow(n, 2)));
-    return sum;
+    let n = this.count;
+    return (n * (n + 1) * (2 * n + 1)) / 6;
   }
 
   get squareOfSum(): number {
-    let sum = 0;
-    this.naturalNumbers.forEach((n) => (sum += n));
+    let n = this.count;
+    let sum = (n / 2) * (n + 1);
     return Math.pow(sum, 2);
   }
 
