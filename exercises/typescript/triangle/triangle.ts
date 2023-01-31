@@ -7,21 +7,19 @@ export class Triangle {
     this.isValid = Triangle.isValid(...sides);
   }
 
-  get isEquilateral() {
+  get isEquilateral(): boolean {
     return this.isValid && this.sides.every((s) => s === this.sides[0]);
   }
 
-  get isIsosceles() {
+  get isIsosceles(): boolean {
     return this.isValid && !this.isScalene;
   }
 
-  get isScalene() {
-    if (!this.isValid) return false;
-
-    for (const [index, side] of this.sides.entries()) {
-      if (this.sides.lastIndexOf(side) !== index) return false;
-    }
-    return true;
+  get isScalene(): boolean {
+    return (
+      this.isValid &&
+      this.sides.every((side, index) => this.sides.lastIndexOf(side) === index)
+    );
   }
 
   private static isValid(...sides: number[]): boolean {
