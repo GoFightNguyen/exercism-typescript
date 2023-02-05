@@ -8,10 +8,11 @@ interface NewScrabbleSystem {
 
 export function transform(old: OldScrabbleSystem): NewScrabbleSystem {
   const transformed: NewScrabbleSystem = {};
-  for (const score in old) {
-    old[score]
-      .map((letter) => letter.toLocaleLowerCase())
-      .forEach((l) => (transformed[l] = Number(score)));
+
+  for (const [score, letters] of Object.entries(old)) {
+    letters.forEach(
+      (l) => (transformed[l.toLocaleLowerCase()] = Number(score))
+    );
   }
   return transformed;
 }
