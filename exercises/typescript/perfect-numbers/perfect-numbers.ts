@@ -8,12 +8,15 @@ function getFactorsOf(num: number): number[] {
   return factors;
 }
 
+const sum = (numbers: number[]): number =>
+  numbers.reduce((agg, current) => (agg += current), 0);
+
 export function classify(num: number): NICOMACHUS_CLASSIFICATION {
   if (num < 1)
     throw new Error('Classification is only possible for natural numbers.');
 
   let factors = getFactorsOf(num);
-  let aliquotSum = factors.reduce((sum, current) => (sum += current), 0);
+  let aliquotSum = sum(factors);
   if (aliquotSum === num) return 'perfect';
   else if (aliquotSum > num) return 'abundant';
 
