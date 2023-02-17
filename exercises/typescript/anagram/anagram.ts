@@ -1,10 +1,10 @@
 class Word {
   private readonly lowered: string;
-  private readonly normalized: string;
+  private readonly alphabetized: string;
 
   constructor(original: string) {
     this.lowered = original.toLowerCase();
-    this.normalized = [...this.lowered].sort().toString();
+    this.alphabetized = [...this.lowered].sort().toString();
   }
 
   public isNot(other: Word): boolean {
@@ -12,7 +12,7 @@ class Word {
   }
 
   public hasTheSameLettersAs(other: Word): boolean {
-    return this.normalized === other.normalized;
+    return this.alphabetized === other.alphabetized;
   }
 }
 
