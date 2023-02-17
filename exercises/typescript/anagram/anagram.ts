@@ -1,6 +1,6 @@
 class Word {
-  readonly lowered: string;
-  readonly normalized: string;
+  private readonly lowered: string;
+  private readonly normalized: string;
 
   constructor(original: string) {
     this.lowered = original.toLowerCase();
