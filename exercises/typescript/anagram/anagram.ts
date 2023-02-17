@@ -10,6 +10,10 @@ class Word {
   public isNot(other: Word): boolean {
     return this.lowered !== other.lowered;
   }
+
+  public hasTheSameLettersAs(other: Word): boolean {
+    return this.normalized === other.normalized;
+  }
 }
 
 export class Anagram {
@@ -25,8 +29,7 @@ export class Anagram {
 
   private isAnAnagram(candidate: Word): boolean {
     return (
-      this.word.isNot(candidate) &&
-      this.word.normalized === candidate.normalized
+      this.word.isNot(candidate) && this.word.hasTheSameLettersAs(candidate)
     );
   }
 }
