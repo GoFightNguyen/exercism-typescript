@@ -2,7 +2,7 @@ type NICOMACHUS_CLASSIFICATION = 'perfect' | 'abundant' | 'deficient';
 
 function findFactorsOf(num: number): number[] {
   let factors: number[] = [];
-  for (let candidate = 1; candidate < num; candidate++) {
+  for (let candidate = 1; candidate <= num; candidate++) {
     if (num % candidate === 0) factors.push(candidate);
   }
   return factors;
@@ -16,9 +16,9 @@ export function classify(num: number): NICOMACHUS_CLASSIFICATION {
     throw new Error('Classification is only possible for natural numbers.');
 
   let factors = findFactorsOf(num);
-  let aliquotSum = sum(factors);
+  let aliquotSum = sum(factors) - num;
+
   if (aliquotSum === num) return 'perfect';
   else if (aliquotSum > num) return 'abundant';
-
   return 'deficient';
 }
