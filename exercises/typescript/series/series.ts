@@ -7,8 +7,8 @@ export class Series {
     this.validateSliceLength(sliceLength);
 
     const allSeries: number[][] = [];
-    const digits = [...this.series].map((n) => Number(n));
 
+    const digits = [...this.series].map((n) => Number(n));
     while (digits.length >= sliceLength) {
       const series = digits.slice(0, sliceLength);
       allSeries.push(series);
