@@ -6,6 +6,10 @@ class Word {
     this.lowered = original.toLowerCase();
     this.normalized = [...this.lowered].sort().toString();
   }
+
+  public isNot(other: Word): boolean {
+    return this.lowered !== other.lowered;
+  }
 }
 
 export class Anagram {
@@ -16,17 +20,12 @@ export class Anagram {
   }
 
   public matches(...potentials: string[]): string[] {
-    const theMatches: string[] = [];
-    potentials.forEach((p) => {
-      const candidate = new Word(p);
-      if (this.isAnAnagram(candidate)) theMatches.push(p);
-    });
-    return theMatches;
+    return potentials.filter((p) => this.isAnAnagram(new Word(p)));
   }
 
   private isAnAnagram(candidate: Word): boolean {
     return (
-      this.word.lowered !== candidate.lowered &&
+      this.word.isNot(candidate) &&
       this.word.normalized === candidate.normalized
     );
   }
