@@ -17,10 +17,10 @@ const NORMAL_TO_ROMAN_MAPPING = new Map<number, string>([
 export const toRoman = (normal: number): string => {
   let roman = '';
 
-  for (const [x, y] of NORMAL_TO_ROMAN_MAPPING.entries()) {
-    while (Math.floor(normal / x) > 0) {
-      roman += y;
-      normal -= x;
+  for (const [value, romanNumeral] of NORMAL_TO_ROMAN_MAPPING.entries()) {
+    while (Math.floor(normal / value) > 0) {
+      roman += romanNumeral;
+      normal -= value;
     }
   }
 
