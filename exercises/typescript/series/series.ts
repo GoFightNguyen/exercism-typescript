@@ -9,11 +9,10 @@ export class Series {
     const allSeries: number[][] = [];
 
     const digits = [...this.series].map((n) => Number(n));
-    while (digits.length >= sliceLength) {
-      const series = digits.slice(0, sliceLength);
-      allSeries.push(series);
-      digits.shift();
+    for (let start = 0; start <= digits.length - sliceLength; start++) {
+      allSeries.push(digits.slice(start, start + sliceLength));
     }
+
     return allSeries;
   }
 
