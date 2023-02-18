@@ -18,9 +18,9 @@ export const toRoman = (normal: number): string => {
   let roman = '';
 
   for (const [value, romanNumeral] of NORMAL_TO_ROMAN_MAPPING.entries()) {
-    while (Math.floor(normal / value) > 0) {
-      roman += romanNumeral;
-      normal -= value;
+    if (normal >= value) {
+      roman += romanNumeral.repeat(normal / value);
+      normal %= value;
     }
   }
 
