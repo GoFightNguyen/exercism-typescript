@@ -1,3 +1,4 @@
+type TerminatingCodon = 'UAA' | 'UAG' | 'UGA';
 type Codon =
   | 'AUG'
   | 'UUU'
@@ -13,9 +14,7 @@ type Codon =
   | 'UGU'
   | 'UGC'
   | 'UGG'
-  | 'UAA'
-  | 'UAG'
-  | 'UGA';
+  | TerminatingCodon;
 type Protein =
   | 'Methionine'
   | 'Phenylalanine'
@@ -48,14 +47,19 @@ const CODON_TO_PROTEIN: Record<Codon, Protein> = {
 const separateIntoCodons = (rnaSequence: string): Codon[] => {
   const codons: Codon[] = [];
   for (let index = 0; index < rnaSequence.length; index += 3) {
-    const element = rnaSequence.slice(index, index + 3);
-    if (CODON_TO_PROTEIN[element as Codon] === 'STOP') break;
-    codons.push(element as Codon);
+    const nucleotideSequence = rnaSequence.slice(index, index + 3);
+    codons.push(nucleotideSequence as Codon);
   }
   return codons;
 };
 
+const translateToProtein = (codon: Codon): Protein => CODON_TO_PROTEIN[codon];
+
 export function translate(rnaSequence: string): Protein[] {
   const codons = separateIntoCodons(rnaSequence);
-  return codons.map((c) => CODON_TO_PROTEIN[c]);
+  const proteins = codons.map((c) => translateToProtein(c));
+  const terminatingIndex = proteins.findIndex((c) => c === 'STOP');
+  return codons
+    .slice(0, terminatingIndex < 0 ? undefined : terminatingIndex)
+    .map((c) => translateToProtein(c));
 }
