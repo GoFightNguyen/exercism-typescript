@@ -24,6 +24,7 @@ type AminoAcid =
   | 'Cysteine'
   | 'Tryptophan'
   | 'STOP';
+type Protein = AminoAcid[];
 const CODON_TO_AMINO_ACID: Record<Codon, AminoAcid> = {
   AUG: 'Methionine',
   UUU: 'Phenylalanine',
@@ -56,7 +57,7 @@ const separateIntoCodons = (rnaSequence: string): Codon[] => {
 const translateToAminoAcid = (codon: Codon): AminoAcid =>
   CODON_TO_AMINO_ACID[codon];
 
-export function translate(rnaSequence: string): AminoAcid[] {
+export function translate(rnaSequence: string): Protein {
   const codons = separateIntoCodons(rnaSequence);
   const aminoAcids = codons.map((c) => translateToAminoAcid(c));
   const terminatingIndex = aminoAcids.findIndex((c) => c === 'STOP');
