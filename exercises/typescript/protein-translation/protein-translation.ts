@@ -15,7 +15,7 @@ type Codon =
   | 'UGC'
   | 'UGG'
   | TerminatingCodon;
-type Protein =
+type AminoAcid =
   | 'Methionine'
   | 'Phenylalanine'
   | 'Leucine'
@@ -24,7 +24,7 @@ type Protein =
   | 'Cysteine'
   | 'Tryptophan'
   | 'STOP';
-const CODON_TO_PROTEIN: Record<Codon, Protein> = {
+const CODON_TO_AMINO_ACID: Record<Codon, AminoAcid> = {
   AUG: 'Methionine',
   UUU: 'Phenylalanine',
   UUC: 'Phenylalanine',
@@ -53,13 +53,15 @@ const separateIntoCodons = (rnaSequence: string): Codon[] => {
   return codons;
 };
 
-const translateToProtein = (codon: Codon): Protein => CODON_TO_PROTEIN[codon];
+const translateToAminoAcid = (codon: Codon): AminoAcid =>
+  CODON_TO_AMINO_ACID[codon];
 
-export function translate(rnaSequence: string): Protein[] {
+export function translate(rnaSequence: string): AminoAcid[] {
   const codons = separateIntoCodons(rnaSequence);
-  const proteins = codons.map((c) => translateToProtein(c));
-  const terminatingIndex = proteins.findIndex((c) => c === 'STOP');
-  return codons
-    .slice(0, terminatingIndex < 0 ? undefined : terminatingIndex)
-    .map((c) => translateToProtein(c));
+  const aminoAcids = codons.map((c) => translateToAminoAcid(c));
+  const terminatingIndex = aminoAcids.findIndex((c) => c === 'STOP');
+  return aminoAcids.slice(
+    0,
+    terminatingIndex < 0 ? undefined : terminatingIndex
+  );
 }
