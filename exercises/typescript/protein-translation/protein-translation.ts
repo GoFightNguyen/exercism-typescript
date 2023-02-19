@@ -57,12 +57,13 @@ const separateIntoCodons = (rnaSequence: string): Codon[] => {
 const translateToAminoAcid = (codon: Codon): AminoAcid =>
   CODON_TO_AMINO_ACID[codon];
 
+const takeUntilTerminated = (protein: Protein): Protein => {
+  const terminatingIndex = protein.findIndex((c) => c === 'STOP');
+  return protein.slice(0, terminatingIndex < 0 ? undefined : terminatingIndex);
+};
+
 export function translate(rnaSequence: string): Protein {
   const codons = separateIntoCodons(rnaSequence);
-  const aminoAcids = codons.map((c) => translateToAminoAcid(c));
-  const terminatingIndex = aminoAcids.findIndex((c) => c === 'STOP');
-  return aminoAcids.slice(
-    0,
-    terminatingIndex < 0 ? undefined : terminatingIndex
-  );
+  const protein = codons.map((c) => translateToAminoAcid(c));
+  return takeUntilTerminated(protein);
 }
