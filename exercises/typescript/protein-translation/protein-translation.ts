@@ -54,7 +54,7 @@ const translateToAminoAcid = (codon: Codon): AminoAcid =>
 
 const takeUntilTerminated = (protein: Protein): Protein => {
   const terminatingIndex = protein.findIndex((c) => c === 'STOP');
-  return protein.slice(0, terminatingIndex < 0 ? undefined : terminatingIndex);
+  return terminatingIndex === -1 ? protein : protein.slice(0, terminatingIndex);
 };
 
 export function translate(rnaSequence: string): Protein {
