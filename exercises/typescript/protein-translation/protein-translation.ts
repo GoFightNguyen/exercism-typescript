@@ -46,12 +46,7 @@ const CODON_TO_AMINO_ACID: Record<Codon, AminoAcid> = {
 };
 
 const separateIntoCodons = (rnaSequence: string): Codon[] => {
-  const codons: Codon[] = [];
-  for (let index = 0; index < rnaSequence.length; index += 3) {
-    const nucleotideSequence = rnaSequence.slice(index, index + 3);
-    codons.push(nucleotideSequence as Codon);
-  }
-  return codons;
+  return rnaSequence.match(/.{3}/g)!.map((codon) => codon as Codon);
 };
 
 const translateToAminoAcid = (codon: Codon): AminoAcid =>
