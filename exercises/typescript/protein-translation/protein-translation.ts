@@ -15,6 +15,7 @@ type Codon =
   | 'UGC'
   | 'UGG'
   | TerminatingCodon;
+const TERMINATING_AMINO_ACID = 'STOP' as const;
 type AminoAcid =
   | 'Methionine'
   | 'Phenylalanine'
@@ -23,7 +24,7 @@ type AminoAcid =
   | 'Tyrosine'
   | 'Cysteine'
   | 'Tryptophan'
-  | 'STOP';
+  | typeof TERMINATING_AMINO_ACID;
 type Protein = AminoAcid[];
 const CODON_TO_AMINO_ACID: Record<Codon, AminoAcid> = {
   AUG: 'Methionine',
@@ -40,9 +41,9 @@ const CODON_TO_AMINO_ACID: Record<Codon, AminoAcid> = {
   UGU: 'Cysteine',
   UGC: 'Cysteine',
   UGG: 'Tryptophan',
-  UAA: 'STOP',
-  UAG: 'STOP',
-  UGA: 'STOP',
+  UAA: TERMINATING_AMINO_ACID,
+  UAG: TERMINATING_AMINO_ACID,
+  UGA: TERMINATING_AMINO_ACID,
 };
 
 const separateIntoCodons = (rnaSequence: string): Codon[] => {
@@ -53,7 +54,7 @@ const translateToAminoAcid = (codon: Codon): AminoAcid =>
   CODON_TO_AMINO_ACID[codon];
 
 const takeUntilTerminated = (protein: Protein): Protein => {
-  const terminatingIndex = protein.findIndex((c) => c === 'STOP');
+  const terminatingIndex = protein.findIndex((c) => c === TERMINATING_AMINO_ACID);
   return terminatingIndex === -1 ? protein : protein.slice(0, terminatingIndex);
 };
 
