@@ -1,4 +1,6 @@
 const isPrime = (n: number): boolean => {
+  // trial division algorithm
+  // https://www.khanacademy.org/computing/computer-science/cryptography/comp-number-theory/a/trial-division
   for (let i = 2; i <= Math.sqrt(n); i++) {
     if (n % i === 0) return false;
   }
@@ -8,29 +10,26 @@ const isPrime = (n: number): boolean => {
 
 export class DiffieHellman {
   private readonly g: number;
-  private readonly p: number;
+  private readonly modulus: number;
 
   constructor(p: number, g: number) {
-    if (!isPrime(p))
-      throw Error('Diffie-Hellman requires the supplied "p" be a prime number');
-    if (!isPrime(g))
-      throw Error('Diffie-Hellman requires the supplied "g" be a prime number');
+    if (!isPrime(p) || !isPrime(g)) {
+      throw Error('Diffie-Hellman requires starting with prime numbers');
+    }
 
-    this.p = p;
+    this.modulus = p;
     this.g = g;
   }
 
   public getPublicKey(privateKey: number): number {
-    if (privateKey <= 1 || privateKey >= this.p) {
-      throw new Error('The privateKey must be > 1 and less than "p"');
+    if (privateKey > 1 && privateKey < this.modulus) {
+      return this.g ** privateKey % this.modulus;
     }
 
-    // ** is the exponentiation operator
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Exponentiation
-    return this.g ** privateKey % this.p;
+    throw new Error('The privateKey must be > 1 and less than "p"');
   }
 
   public getSecret(theirPublicKey: number, myPrivateKey: number): number {
-    return theirPublicKey ** myPrivateKey % this.p;
+    return theirPublicKey ** myPrivateKey % this.modulus;
   }
 }
