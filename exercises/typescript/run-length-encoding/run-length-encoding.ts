@@ -31,7 +31,7 @@ export function decode(compressed: string): string {
       decoded += r;
     } else {
       const runLength = Number(r.slice(0, -1));
-      decoded += r.at(-1)!.repeat(runLength);
+      decoded += r[r.length - 1].repeat(runLength);
     }
   });
 
