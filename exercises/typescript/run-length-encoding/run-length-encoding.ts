@@ -23,17 +23,18 @@ const getEncodedRuns = (compressed: string): string[] =>
   // something about this split and regex causes entries of ''
   compressed.split(/(\d*[a-zA-Z]{1})/).filter((r) => r !== '');
 
-export function decode(compressed: string): string {
-  let decoded = '';
-  const runs = getEncodedRuns(compressed);
-  runs.forEach((r) => {
-    if (r.length === 1) {
-      decoded += r;
-    } else {
-      const runLength = Number(r.slice(0, -1));
-      decoded += r[r.length - 1].repeat(runLength);
-    }
-  });
+const decodeRun = (run: string): string => {
+  if (run.length === 1) {
+    return run;
+  }
 
-  return decoded;
+  const runLength = Number(run.slice(0, -1));
+  return run[run.length - 1].repeat(runLength);
+};
+
+export function decode(compressed: string): string {
+  return getEncodedRuns(compressed).reduce(
+    (decoded, run) => (decoded += decodeRun(run)),
+    ''
+  );
 }
