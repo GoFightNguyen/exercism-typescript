@@ -9,16 +9,10 @@ const isPrime = (n: number): boolean => {
 };
 
 export class DiffieHellman {
-  private readonly g: number;
-  private readonly modulus: number;
-
-  constructor(p: number, g: number) {
-    if (!isPrime(p) || !isPrime(g)) {
+  constructor(private readonly modulus: number, private readonly g: number) {
+    if (!isPrime(modulus) || !isPrime(g)) {
       throw Error('Diffie-Hellman requires starting with prime numbers');
     }
-
-    this.modulus = p;
-    this.g = g;
   }
 
   public getPublicKey(privateKey: number): number {
