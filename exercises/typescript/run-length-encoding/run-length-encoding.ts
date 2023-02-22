@@ -1,22 +1,15 @@
+const getRuns = (original: string): string[] => original.match(/(.)\1*/g) ?? [];
+
+const encodeRun = (run: string): string =>
+  run.length === 1 ? run : `${run.length}${run[0]}`;
+
 export function encode(original: string): string {
   if (!original) return '';
 
-  let runsIndex = 0;
-  let previousLetter = original[0];
-  const runs: string[] = [previousLetter];
-
-  for (let index = 1; index < original.length; index++) {
-    const currentLetter = original[index];
-    if (currentLetter === previousLetter) {
-      runs[runsIndex] += currentLetter;
-    } else {
-      runs.push(currentLetter);
-      previousLetter = currentLetter;
-      runsIndex++;
-    }
-  }
-
-  return runs.map((r) => (r.length === 1 ? r : `${r.length}${r[0]}`)).join('');
+  return getRuns(original).reduce(
+    (encoded, run) => (encoded += encodeRun(run)),
+    ''
+  );
 }
 
 const getEncodedRuns = (compressed: string): string[] =>
