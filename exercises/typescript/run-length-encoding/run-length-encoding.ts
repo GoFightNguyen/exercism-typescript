@@ -13,8 +13,7 @@ export function encode(original: string): string {
 }
 
 const getEncodedRuns = (compressed: string): string[] =>
-  // something about this split and regex causes entries of ''
-  compressed.split(/(\d*[a-zA-Z]{1})/).filter((r) => r !== '');
+  compressed.match(/(\d*)(.)/g) ?? [];
 
 const decodeRun = (run: string): string => {
   if (run.length === 1) {
