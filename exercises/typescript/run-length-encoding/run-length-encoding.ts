@@ -15,14 +15,11 @@ export function encode(original: string): string {
 const getEncodedRuns = (compressed: string): string[] =>
   compressed.match(/(\d*)(.)/g) ?? [];
 
-const decodeRun = (run: string): string => {
-  if (run.length === 1) {
-    return run;
-  }
+const parseRunLength = (run: string): number =>
+  run.length === 1 ? 1 : Number(run.slice(0, -1));
 
-  const runLength = Number(run.slice(0, -1));
-  return run[run.length - 1].repeat(runLength);
-};
+const decodeRun = (run: string): string =>
+  run[run.length - 1].repeat(parseRunLength(run));
 
 export function decode(compressed: string): string {
   return getEncodedRuns(compressed).reduce(
